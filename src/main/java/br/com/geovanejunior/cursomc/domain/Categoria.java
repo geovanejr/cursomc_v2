@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 @Entity
@@ -17,27 +19,32 @@ public class Categoria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String nome;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:MM:ss", timezone = "GMT")
-    private Instant dataCadastro;
+    private Instant dataCadastro = LocalDateTime.now().toInstant(ZoneOffset.UTC);
 
     public Categoria() {
 
     }
 
-    public Categoria(Long id, String nome, Instant dataCadastro) {
+    public Categoria(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    public Categoria(Integer id, String nome, Instant dataCadastro) {
         this.id = id;
         this.nome = nome;
         this.dataCadastro = dataCadastro;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,7 +1,11 @@
 package br.com.geovanejunior.cursomc.resources;
 
 import br.com.geovanejunior.cursomc.domain.Categoria;
+import br.com.geovanejunior.cursomc.service.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,17 +19,16 @@ import java.util.List;
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
 
-    @GetMapping
-    public List<Categoria> listar() {
+    @Autowired
+    private CategoriaService categoriaService;
 
-        Categoria cat1 = new Categoria(1L,"Informática", LocalDateTime.now().toInstant(ZoneOffset.UTC));
-        Categoria cat2 = new Categoria(2L, "Escritório", LocalDateTime.now().toInstant(ZoneOffset.UTC));
+    @GetMapping(value="/{id}")
+    public ResponseEntity<?> buscaPorId(@PathVariable Integer id) {
 
-        List<Categoria> lista = new ArrayList<>();
+        Categoria categoria = categoriaService.buscarPorId(id);
 
-        lista.addAll(Arrays.asList(cat1, cat2));
+        return ResponseEntity.ok().body(categoria);
 
-        return lista;
     }
 
 }
