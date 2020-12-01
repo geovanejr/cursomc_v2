@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
@@ -23,7 +17,7 @@ public class CategoriaResource {
     private CategoriaService categoriaService;
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<?> buscaPorId(@PathVariable Integer id) {
+    public ResponseEntity<?> buscaPorId(@PathVariable Long id) {
 
         Categoria categoria = categoriaService.buscarPorId(id);
 
