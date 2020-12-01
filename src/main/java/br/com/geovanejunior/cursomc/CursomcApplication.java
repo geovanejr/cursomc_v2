@@ -34,6 +34,8 @@ public class CursomcApplication implements CommandLineRunner {
 		Categoria cat2 = new Categoria(null, "Escritório");
 		Categoria cat3 = new Categoria(null, "Jardinagem");
 
+		Thread.sleep(1800);
+
 		// Instanciando Produto
 
 		Produto prod1 = new Produto(null, "Computador", 2000.0);

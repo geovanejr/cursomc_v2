@@ -2,6 +2,7 @@ package br.com.geovanejunior.cursomc.service;
 
 import br.com.geovanejunior.cursomc.domain.Categoria;
 import br.com.geovanejunior.cursomc.repositories.CategoriaRepository;
+import br.com.geovanejunior.cursomc.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class CategoriaService {
 
         Optional<Categoria> obj = categoriaRepository.findById(id);
 
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 }

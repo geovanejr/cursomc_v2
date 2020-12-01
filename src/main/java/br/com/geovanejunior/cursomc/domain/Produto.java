@@ -1,7 +1,14 @@
 package br.com.geovanejunior.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,11 +24,15 @@ public class Produto implements Serializable {
     private String nome;
     private Double preco;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:MM:ss", timezone = "GMT")
+    private Instant dataCadastro = LocalDateTime.now().toInstant(ZoneOffset.UTC);
+
     @ManyToMany
     @JoinTable(name="PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),
     inverseJoinColumns = @JoinColumn(name = "categoria_id")
     )
+    @JsonBackReference
     private List<Categoria> categorias = new ArrayList<>();
 
     public Produto() {
@@ -55,6 +66,14 @@ public class Produto implements Serializable {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public Instant getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Instant dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     public List<Categoria> getCategorias() {
