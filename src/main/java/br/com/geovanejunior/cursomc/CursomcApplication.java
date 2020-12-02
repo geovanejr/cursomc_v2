@@ -1,15 +1,18 @@
 package br.com.geovanejunior.cursomc;
 
 import br.com.geovanejunior.cursomc.domain.Categoria;
+import br.com.geovanejunior.cursomc.domain.Cidade;
+import br.com.geovanejunior.cursomc.domain.Estado;
 import br.com.geovanejunior.cursomc.domain.Produto;
 import br.com.geovanejunior.cursomc.repositories.CategoriaRepository;
+import br.com.geovanejunior.cursomc.repositories.CidadeRepository;
+import br.com.geovanejunior.cursomc.repositories.EstadoRepository;
 import br.com.geovanejunior.cursomc.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -20,6 +23,12 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
+
+	@Autowired
+	private EstadoRepository estadoRepository;
+
+	@Autowired
+	private CidadeRepository cidadeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -52,9 +61,24 @@ public class CursomcApplication implements CommandLineRunner {
 		prod3.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		prod4.getCategorias().addAll(Arrays.asList(cat3));
 
+		// Instanciando Estado
+
+		Estado est1 = new Estado(null, "São Paulo", "SP");
+		Estado est2 = new Estado(null, "Minas Gerais", "MG");
+
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 
 		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4));
+
+		Cidade cid1 = new Cidade(null, "Uberlândia", est2);
+		Cidade cid2 = new Cidade(null, "São Paulo", est1);
+		Cidade cid3 = new Cidade(null, "Campinas", est1);
+
+		est1.getCidades().addAll(Arrays.asList(cid2, cid3));
+		est2.getCidades().addAll(Arrays.asList(cid1));
+
+		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
 
 	}
 }
