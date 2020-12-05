@@ -1,5 +1,7 @@
 package br.com.geovanejunior.cursomc.domain;
 
+import br.com.geovanejunior.cursomc.domain.enums.UF;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -18,14 +20,17 @@ public class Cidade implements Serializable {
     @JoinColumn(name = "estado_id")
     private Estado estado;
 
+    private UF UF;
+
     public Cidade() {
 
     }
 
-    public Cidade(Long id, String nome, Estado estado) {
+    public Cidade(Long id, String nome, Estado estado, UF UF) {
         this.id = id;
         this.nome = nome;
         this.estado = estado;
+        this.UF = UF;
     }
 
     public Long getId() {
@@ -50,6 +55,14 @@ public class Cidade implements Serializable {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public UF getUF() {
+        return UF;
+    }
+
+    public void setUF(UF UF) {
+        this.UF = UF;
     }
 
     @Override
