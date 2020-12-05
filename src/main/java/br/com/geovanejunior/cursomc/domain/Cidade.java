@@ -1,6 +1,7 @@
 package br.com.geovanejunior.cursomc.domain;
 
 import br.com.geovanejunior.cursomc.domain.enums.UF;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,19 +19,17 @@ public class Cidade implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "estado_id")
+    @JsonManagedReference
     private Estado estado;
-
-    private UF UF;
 
     public Cidade() {
 
     }
 
-    public Cidade(Long id, String nome, Estado estado, UF UF) {
+    public Cidade(Long id, String nome, Estado estado) {
         this.id = id;
         this.nome = nome;
         this.estado = estado;
-        this.UF = UF;
     }
 
     public Long getId() {
@@ -55,14 +54,6 @@ public class Cidade implements Serializable {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
-    }
-
-    public UF getUF() {
-        return UF;
-    }
-
-    public void setUF(UF UF) {
-        this.UF = UF;
     }
 
     @Override

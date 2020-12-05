@@ -1,6 +1,7 @@
 package br.com.geovanejunior.cursomc.domain;
 
 import br.com.geovanejunior.cursomc.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class Cliente implements Serializable {
     private Integer tipoCliente;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
