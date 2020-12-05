@@ -1,17 +1,24 @@
 package br.com.geovanejunior.cursomc.domain;
 
 import br.com.geovanejunior.cursomc.domain.enums.EstadoPagamento;
+import org.springframework.cache.annotation.EnableCaching;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class Pagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
     private Long id;
     private EstadoPagamento estadoPagamento;
 
+    @OneToOne
+    @JoinColumn(name="pedido_id")
+    @MapsId
     private Pedido pedido;
 
     public Pagamento() {
