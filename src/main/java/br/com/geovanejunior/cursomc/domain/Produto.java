@@ -9,9 +9,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Produto implements Serializable {
@@ -35,6 +33,8 @@ public class Produto implements Serializable {
     @JsonBackReference
     private List<Categoria> categorias = new ArrayList<>();
 
+    private Set<ItemPedido> itens = new HashSet<>();
+
     public Produto() {
     }
 
@@ -42,6 +42,17 @@ public class Produto implements Serializable {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public List<Pedido> getPedidos() {
+
+        List<Pedido> listaPedido = new ArrayList<>();
+
+        for(ItemPedido itemPedido : itens) {
+            listaPedido.add(itemPedido.getPedido());
+        }
+
+        return listaPedido;
     }
 
     public Long getId() {
@@ -82,6 +93,14 @@ public class Produto implements Serializable {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override
