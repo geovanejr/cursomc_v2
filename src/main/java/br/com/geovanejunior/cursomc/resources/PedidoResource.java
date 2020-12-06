@@ -1,7 +1,7 @@
 package br.com.geovanejunior.cursomc.resources;
 
-import br.com.geovanejunior.cursomc.domain.Categoria;
-import br.com.geovanejunior.cursomc.service.CategoriaService;
+import br.com.geovanejunior.cursomc.domain.Pedido;
+import br.com.geovanejunior.cursomc.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,19 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="/categorias")
-public class CategoriaResource {
-
+@RequestMapping(value = "/pedidos")
+public class PedidoResource {
+    
     @Autowired
-    private CategoriaService categoriaService;
-
+    private PedidoService pedidoService;
+    
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> buscaPorId(@PathVariable Long id) {
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
 
-        Categoria categoria = categoriaService.buscarPorId(id);
-
-        return ResponseEntity.ok().body(categoria);
-
+        Pedido pedido = pedidoService.buscarPorId(id);
+        return ResponseEntity.ok().body(pedido);
     }
-
 }

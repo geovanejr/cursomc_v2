@@ -1,6 +1,7 @@
 package br.com.geovanejunior.cursomc.domain;
 
 import br.com.geovanejunior.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Entity;
 import java.util.Date;
@@ -10,7 +11,10 @@ public class PagamentoComBoleto extends Pagamento{
 
     private static final long serialVersionUID = 1L;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:MM:ss", timezone = "GMT")
     private Date dataVencimento;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:MM:ss", timezone = "GMT")
     private Date dataPagamento;
 
     public PagamentoComBoleto() {

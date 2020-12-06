@@ -1,6 +1,7 @@
 package br.com.geovanejunior.cursomc.domain;
 
 import br.com.geovanejunior.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.cache.annotation.EnableCaching;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public abstract class Pagamento implements Serializable {
     @OneToOne
     @JoinColumn(name="pedido_id")
     @MapsId
+    @JsonBackReference
     private Pedido pedido;
 
     public Pagamento() {
