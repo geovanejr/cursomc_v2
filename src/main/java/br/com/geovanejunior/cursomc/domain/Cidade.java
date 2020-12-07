@@ -1,8 +1,5 @@
 package br.com.geovanejunior.cursomc.domain;
 
-import br.com.geovanejunior.cursomc.domain.enums.UF;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -19,7 +16,6 @@ public class Cidade implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "estado_id")
-    @JsonManagedReference
     private Estado estado;
 
     public Cidade() {

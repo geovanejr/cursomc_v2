@@ -1,8 +1,6 @@
 package br.com.geovanejunior.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,11 +20,9 @@ public class Pedido implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:MM:ss", timezone = "GMT")
     private Date instante;
 
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
