@@ -1,6 +1,7 @@
 package br.com.geovanejunior.cursomc.resources;
 
 import br.com.geovanejunior.cursomc.domain.Categoria;
+import br.com.geovanejunior.cursomc.dto.CategoriaDTO;
 import br.com.geovanejunior.cursomc.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value="/categorias")
@@ -52,6 +55,16 @@ public class CategoriaResource {
         categoriaService.deleteCategoria(id);
 
         return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping
+    public ResponseEntity<List<CategoriaDTO>> findall() {
+
+        List<Categoria> lista = categoriaService.findAll();
+        List<CategoriaDTO> listaDTO = lista.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(listaDTO);
+
     }
 
 }
