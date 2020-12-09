@@ -2,14 +2,17 @@ package br.com.geovanejunior.cursomc.dto;
 
 import br.com.geovanejunior.cursomc.domain.Categoria;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 public class CategoriaDTO {
 
     private Long id;
+
+    @NotEmpty(message = "Preenchimento Obrigatório")
+    @Length(min=5, max=80, message = "O tamanho deve ser entre 5 e 80 caracteres")
     private String nome;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:MM:ss", timezone = "GMT")

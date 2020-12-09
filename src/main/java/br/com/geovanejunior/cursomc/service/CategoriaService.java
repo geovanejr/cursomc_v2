@@ -1,6 +1,7 @@
 package br.com.geovanejunior.cursomc.service;
 
 import br.com.geovanejunior.cursomc.domain.Categoria;
+import br.com.geovanejunior.cursomc.dto.CategoriaDTO;
 import br.com.geovanejunior.cursomc.repositories.CategoriaRepository;
 import br.com.geovanejunior.cursomc.service.exceptions.DataIntegrityException;
 import br.com.geovanejunior.cursomc.service.exceptions.ObjectNotFoundException;
@@ -63,6 +64,10 @@ public class CategoriaService {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
 
         return categoriaRepository.findAll(pageRequest);
+    }
 
+    public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
     }
 }
