@@ -25,6 +25,8 @@ public class Categoria implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'hh:MM:ss", timezone = "GMT")
     private Instant dataCadastro = LocalDateTime.now().toInstant(ZoneOffset.UTC);
 
+    private Instant dataAtualizacao;
+
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<>();
 
@@ -67,6 +69,14 @@ public class Categoria implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
+    public Instant getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(Instant dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
+
     public List<Produto> getProdutos() {
         return produtos;
     }
@@ -88,12 +98,4 @@ public class Categoria implements Serializable {
         return Objects.hash(id);
     }
 
-    @Override
-    public String toString() {
-        return "Categoria{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", dataCadastro=" + dataCadastro +
-                '}';
-    }
 }

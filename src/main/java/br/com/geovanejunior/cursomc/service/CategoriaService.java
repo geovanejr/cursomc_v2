@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +41,16 @@ public class CategoriaService {
 
     public Categoria updateCategoria(Categoria categoria) {
 
-        findById(categoria.getId());
+        Categoria newObj = findById(categoria.getId());
+        updateData(newObj, categoria);
 
-        return categoriaRepository.save(categoria);
+        return categoriaRepository.save(newObj);
+    }
+
+    private void updateData(Categoria newObj, Categoria categoria) {
+
+        newObj.setNome(categoria.getNome());
+        newObj.setDataAtualizacao(LocalDateTime.now().toInstant(ZoneOffset.UTC));
     }
 
     public void deleteCategoria(Long id) {
