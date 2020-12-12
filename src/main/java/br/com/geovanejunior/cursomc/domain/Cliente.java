@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.*;
 
 @Entity
@@ -20,6 +21,8 @@ public class Cliente implements Serializable {
     private String email;
 
     private Integer tipoCliente;
+
+    private Instant dataAtualizacao;
 
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
@@ -74,6 +77,14 @@ public class Cliente implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Instant getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(Instant dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
     }
 
     public TipoCliente getTipoCliente() {
