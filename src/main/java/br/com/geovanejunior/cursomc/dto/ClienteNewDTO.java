@@ -1,25 +1,44 @@
 package br.com.geovanejunior.cursomc.dto;
 
+import br.com.geovanejunior.cursomc.service.validation.ClienteInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     // Dados do Cliente
 
-    private Long id;
+    @NotEmpty(message = "Preenchimento Obrigatório")
+    @Length(min=5, max=120, message = "O tamanho deve ser entre 5 e 80 caracteres")
     private String nome;
+
+    @NotEmpty(message = "Preenchimento Obrigatório")
     private String cpfOUCNPJ;
+
+    @NotEmpty(message = "Preenchimento Obrigatório")
+    @Email(message = "Email inválido")
     private String email;
+
     private Integer tipoCliente;
 
     // Dados do Endereço do Cliente
 
+    @NotEmpty(message = "Preenchimento Obrigatório")
     private String logradouro;
+
+    @NotEmpty(message = "Preenchimento Obrigatório")
     private String numero;
+
     private String complemento;
     private String bairro;
+
+    @NotEmpty(message = "Preenchimento Obrigatório")
     private String cep;
 
     // Id para instanciar a classe Cidade
@@ -28,20 +47,14 @@ public class ClienteNewDTO implements Serializable {
 
     // Dados dos telefones
 
+    @NotEmpty(message = "Preenchimento Obrigatório")
     private String telefone1;
+
     private String telefone2;
     private String telefone3;
 
     public ClienteNewDTO() {
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
