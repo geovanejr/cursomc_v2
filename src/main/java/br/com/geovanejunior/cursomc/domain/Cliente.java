@@ -16,10 +16,14 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 100)
     private String nome;
+
+    @Column(length = 15)
     private String cpfOUCNPJ;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 50)
     private String email;
 
     private Integer tipoCliente;
