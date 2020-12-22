@@ -1,7 +1,6 @@
 package br.com.geovanejunior.cursomc.service;
 
 import br.com.geovanejunior.cursomc.domain.ItemPedido;
-import br.com.geovanejunior.cursomc.domain.Pagamento;
 import br.com.geovanejunior.cursomc.domain.PagamentoComBoleto;
 import br.com.geovanejunior.cursomc.domain.Pedido;
 import br.com.geovanejunior.cursomc.domain.enums.EstadoPagamento;
@@ -33,6 +32,9 @@ public class PedidoService {
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
 
+    @Autowired
+    private ClienteService clienteService;
+
     public Pedido buscarPorId(Long id) {
 
         Optional<Pedido> obj = pedidoRepository.findById(id);
@@ -47,6 +49,10 @@ public class PedidoService {
 
         pedido.setId(null);
         pedido.setInstante(new Date());
+
+        // instanciando os dados da classe Pedido
+
+        pedido.setCliente(clienteService.findById(pedido.getCliente().getId()));
 
         // instanciando os dados da Classe Pagamento
 
@@ -67,11 +73,14 @@ public class PedidoService {
 
         for (ItemPedido ip : pedido.getItens()) {
             ip.setDesconto(0.0);
-            ip.setPreco(produtoService.buscarPorId(ip.getProduto().getId()).getPreco());
+            ip.setProduto(produtoService.buscarPorId(ip.getProduto().getId()));
+            ip.setPreco(ip.getProduto().getPreco());
             ip.setPedido(pedido);
         }
 
         itemPedidoRepository.saveAll(pedido.getItens());
+
+        System.out.println(pedido);
 
         return  pedido;
     }

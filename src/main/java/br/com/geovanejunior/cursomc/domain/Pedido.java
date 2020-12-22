@@ -1,9 +1,12 @@
 package br.com.geovanejunior.cursomc.domain;
 
+import br.com.geovanejunior.cursomc.domain.utils.FormataDados;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -94,6 +97,27 @@ public class Pedido implements Serializable {
 
     public void setItens(Set<ItemPedido> itens) {
         this.itens = itens;
+    }
+
+    @Override
+    public String toString() {
+
+        FormataDados fmt = new FormataDados();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Pedido nº: ").append(getId());
+        sb.append(", Data Pedido: ").append(fmt.formataData(getInstante()));
+        sb.append(", Cliente: ").append(getCliente().getNome());
+        sb.append(", Situação do Pagamento: ").append(getPagamento().getEstadoPagamento().getDescrTipoEstadoPagamento());
+        sb.append("\n\nDetalhes\n\n");
+
+        for (ItemPedido ip: getItens()) {
+            sb.append(ip.toString());
+        }
+
+        sb.append("\nValor Total: ").append(fmt.formataValor(getValorTotal()));
+
+        return  sb.toString();
     }
 
     @Override

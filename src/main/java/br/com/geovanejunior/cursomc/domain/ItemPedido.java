@@ -1,10 +1,13 @@
 package br.com.geovanejunior.cursomc.domain;
 
+import br.com.geovanejunior.cursomc.domain.utils.FormataDados;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 @Entity
@@ -91,6 +94,20 @@ public class ItemPedido implements Serializable {
     public Double getValorDesconto() {
 
         return getPreco() * getDesconto() / 100;
+    }
+
+    @Override
+    public String toString() {
+
+        FormataDados fmt = new FormataDados();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(getProduto().getNome());
+        sb.append(", Qtde: ").append(getQuantidade());
+        sb.append(", Preço Unitário: ").append(fmt.formataValor(getPreco()));
+        sb.append(", SubTotal: ").append(fmt.formataValor(getSubTotal()));
+        sb.append("\n");
+        return sb.toString();
     }
 
     @Override
