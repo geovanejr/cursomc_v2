@@ -1,6 +1,8 @@
 package br.com.geovanejunior.cursomc.config;
 
 import br.com.geovanejunior.cursomc.service.DBService;
+import br.com.geovanejunior.cursomc.service.EmailService;
+import br.com.geovanejunior.cursomc.service.SMTPEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -29,5 +31,11 @@ public class DevConfig {
 
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService() {
+
+        return new SMTPEmailService();
     }
 }
