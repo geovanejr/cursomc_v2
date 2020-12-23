@@ -30,6 +30,9 @@ public class Cliente implements Serializable {
 
     private Instant dataAtualizacao;
 
+    @JsonIgnore
+    private String senha;
+
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
@@ -45,12 +48,13 @@ public class Cliente implements Serializable {
 
     }
 
-    public Cliente(Long id, String nome, String cpfOUCNPJ, String email, TipoCliente tipoCliente) {
+    public Cliente(Long id, String nome, String cpfOUCNPJ, String email, TipoCliente tipoCliente, String senha) {
         this.id = id;
         this.nome = nome;
         this.cpfOUCNPJ = cpfOUCNPJ;
         this.email = email;
         this.tipoCliente = (tipoCliente == null) ? null : tipoCliente.getCodTipoCliente();
+        this.senha = senha;
     }
 
     public Long getId() {
@@ -91,6 +95,14 @@ public class Cliente implements Serializable {
 
     public void setDataAtualizacao(Instant dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public TipoCliente getTipoCliente() {

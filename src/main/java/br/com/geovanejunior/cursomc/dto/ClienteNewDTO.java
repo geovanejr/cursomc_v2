@@ -25,6 +25,10 @@ public class ClienteNewDTO implements Serializable {
     @Email(message = "Email inválido")
     private String email;
 
+    @NotEmpty(message = "Preenchimento Obrigatório")
+    @Length(min=6, max=40, message="O tamanho deve ser entre 6 e 40 caracteres")
+    private String senha;
+
     private Integer tipoCliente;
 
     // Dados do Endereço do Cliente
@@ -79,6 +83,14 @@ public class ClienteNewDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public Integer getTipoCliente() {
