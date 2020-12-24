@@ -2,6 +2,7 @@ package br.com.geovanejunior.cursomc.service;
 
 import br.com.geovanejunior.cursomc.domain.*;
 import br.com.geovanejunior.cursomc.domain.enums.EstadoPagamento;
+import br.com.geovanejunior.cursomc.domain.enums.Perfil;
 import br.com.geovanejunior.cursomc.domain.enums.TipoCliente;
 import br.com.geovanejunior.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +118,7 @@ public class DBService {
 
         Cliente cli2 = new Cliente(null,"Geovane Junior","14856523830","geovane.gjunior.curso@gmail.com", TipoCliente.PESSOAFISICA, bCryptPass.encode("123456"));
         cli2.getTelefones().addAll(Arrays.asList("11999468056", "11982854499"));
+        cli2.addPerfil(Perfil.ADMIN);
 
         Endereco e1 = new Endereco(null, "Rua Flores","300", "Apto 203", "Jardim", "38220834", cli1, cid1);
         Endereco e2 = new Endereco(null, "Av Mattos","105", "Sala 800", "Centro", "38777012", cli1, cid2);
