@@ -1,5 +1,6 @@
 package br.com.geovanejunior.cursomc.service;
 
+import br.com.geovanejunior.cursomc.domain.Cliente;
 import br.com.geovanejunior.cursomc.domain.Pedido;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -14,4 +15,6 @@ public interface EmailService {
     void sendOrderConfirmationHTMLEmail(Pedido pedido);
 
     void sendHTMLEmail(MimeMessage sm);
+
+    void sendNewPasswordEmail(Cliente cliente, String newPassword);
 }
