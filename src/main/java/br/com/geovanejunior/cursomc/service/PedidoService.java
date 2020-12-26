@@ -1,14 +1,17 @@
 package br.com.geovanejunior.cursomc.service;
 
-import br.com.geovanejunior.cursomc.domain.ItemPedido;
-import br.com.geovanejunior.cursomc.domain.PagamentoComBoleto;
-import br.com.geovanejunior.cursomc.domain.Pedido;
+import br.com.geovanejunior.cursomc.domain.*;
 import br.com.geovanejunior.cursomc.domain.enums.EstadoPagamento;
 import br.com.geovanejunior.cursomc.repositories.ItemPedidoRepository;
 import br.com.geovanejunior.cursomc.repositories.PagamentoRepository;
 import br.com.geovanejunior.cursomc.repositories.PedidoRepository;
+import br.com.geovanejunior.cursomc.security.UserSS;
+import br.com.geovanejunior.cursomc.service.exceptions.AutorizationException;
 import br.com.geovanejunior.cursomc.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -90,5 +93,20 @@ public class PedidoService {
 //        emailService.sendOrderConfirmationHTMLEmail(pedido);
 
         return  pedido;
+    }
+
+    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+
+        UserSS user = UserService.authenticated();
+
+        if (user == null) {
+            throw new AutorizationException("Acesso negado");
+        }
+
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+
+        Cliente cliente = clienteService.findById(user.getId());
+
+        return pedidoRepository.findByCliente(cliente, pageRequest);
     }
 }
