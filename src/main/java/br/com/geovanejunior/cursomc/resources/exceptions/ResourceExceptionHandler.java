@@ -1,5 +1,6 @@
 package br.com.geovanejunior.cursomc.resources.exceptions;
 
+import br.com.geovanejunior.cursomc.service.exceptions.AutorizationException;
 import br.com.geovanejunior.cursomc.service.exceptions.DataIntegrityException;
 import br.com.geovanejunior.cursomc.service.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,14 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
+    @ExceptionHandler(AutorizationException.class)
+    public ResponseEntity<StandardError> autorizationException(AutorizationException e, HttpServletRequest request) {
 
+        HttpStatus status = HttpStatus.FORBIDDEN;
+
+        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage());
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
 
 }

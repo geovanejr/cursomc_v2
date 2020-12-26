@@ -3,11 +3,14 @@ package br.com.geovanejunior.cursomc.service;
 import br.com.geovanejunior.cursomc.domain.Cidade;
 import br.com.geovanejunior.cursomc.domain.Cliente;
 import br.com.geovanejunior.cursomc.domain.Endereco;
+import br.com.geovanejunior.cursomc.domain.enums.Perfil;
 import br.com.geovanejunior.cursomc.domain.enums.TipoCliente;
 import br.com.geovanejunior.cursomc.dto.ClienteDTO;
 import br.com.geovanejunior.cursomc.dto.ClienteNewDTO;
 import br.com.geovanejunior.cursomc.repositories.ClienteRepository;
 import br.com.geovanejunior.cursomc.repositories.EnderecoRepository;
+import br.com.geovanejunior.cursomc.security.UserSS;
+import br.com.geovanejunior.cursomc.service.exceptions.AutorizationException;
 import br.com.geovanejunior.cursomc.service.exceptions.DataIntegrityException;
 import br.com.geovanejunior.cursomc.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,12 @@ public class ClienteService {
     private BCryptPasswordEncoder bCryptPass;
 
     public Cliente findById(Long id) {
+
+        UserSS user = UserService.authenticated();
+
+        if (user == null || !user.hasHole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AutorizationException("Acesso Negado");
+        }
 
         Optional<Cliente> obj = clienteRepository.findById(id);
 
