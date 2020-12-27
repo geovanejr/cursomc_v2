@@ -1,5 +1,6 @@
 package br.com.geovanejunior.cursomc.service;
 
+import br.com.geovanejunior.cursomc.service.exceptions.FileS3Exception;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import org.slf4j.Logger;
@@ -34,13 +35,13 @@ public class S3Service {
 
             return uploadFile(inputStream, fileName, contentType);
 
-        } catch (IOException | URISyntaxException e) {
-            throw new RuntimeException("Erro de IO: " + e.getMessage());
+        } catch (IOException e) {
+            throw new FileS3Exception("Erro de IO: " + e.getMessage());
         }
 
     }
 
-    public URI uploadFile(InputStream is, String fileName, String contentType) throws URISyntaxException {
+    public URI uploadFile(InputStream is, String fileName, String contentType) {
 
         try {
             ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -53,7 +54,7 @@ public class S3Service {
             return s3Client.getUrl(bucketName, fileName).toURI();
 
         } catch (URISyntaxException e) {
-            throw new RuntimeException("Erro ao converter URL para URI");
+            throw new FileS3Exception ("Erro ao converter URL para URI: " + e.getMessage());
         }
     }
 }
