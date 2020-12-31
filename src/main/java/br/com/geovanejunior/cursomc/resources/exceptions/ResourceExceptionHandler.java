@@ -26,7 +26,7 @@ public class ResourceExceptionHandler {
 
         HttpStatus status = HttpStatus.NOT_FOUND;
 
-        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage());
+        StandardError err = new StandardError(Instant.now(), status.value(), "Não encontrado", e.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(status).body(err);
     }
@@ -36,7 +36,7 @@ public class ResourceExceptionHandler {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage());
+        StandardError err = new StandardError(Instant.now(), status.value(), "Integridade de Dados", e.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(status).body(err);
     }
@@ -44,9 +44,9 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
 
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 
-        ValidationError err = new ValidationError(Instant.now(), status.value(), "Erro de validação");
+        ValidationError err = new ValidationError(Instant.now(), status.value(), "Erro de Validação", e.getMessage(), request.getRequestURI());
 
         for (FieldError x : e.getBindingResult().getFieldErrors() ) {
             err.addError(x.getField(), x.getDefaultMessage());
@@ -60,7 +60,7 @@ public class ResourceExceptionHandler {
 
         HttpStatus status = HttpStatus.FORBIDDEN;
 
-        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage());
+        StandardError err = new StandardError(Instant.now(), status.value(), "Acesso Negado", e.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(status).body(err);
     }
@@ -70,7 +70,7 @@ public class ResourceExceptionHandler {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage());
+        StandardError err = new StandardError(Instant.now(), status.value(), "Erro de Arquivo", e.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(status).body(err);
     }
@@ -80,7 +80,7 @@ public class ResourceExceptionHandler {
 
         HttpStatus status = HttpStatus.valueOf(e.getErrorCode());
 
-        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage());
+        StandardError err = new StandardError(Instant.now(), status.value(), "Erro Amazon Service", e.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(status).body(err);
     }
@@ -90,7 +90,7 @@ public class ResourceExceptionHandler {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage());
+        StandardError err = new StandardError(Instant.now(), status.value(), "Erro Amazon Client Service", e.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(status).body(err);
     }
@@ -100,7 +100,7 @@ public class ResourceExceptionHandler {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage());
+        StandardError err = new StandardError(Instant.now(), status.value(), "Erro Amazon S3", e.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(status).body(err);
     }
