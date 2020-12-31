@@ -16,8 +16,8 @@ public class Estado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
     private String UF;
+    private String nome;
 
     @OneToMany(mappedBy = "estado")
     @JsonIgnore
@@ -26,7 +26,7 @@ public class Estado implements Serializable {
     public Estado() {
     }
 
-    public Estado(Long id, String nome, String UF) {
+    public Estado(Long id, String UF, String nome) {
         this.id = id;
         this.nome = nome;
         this.UF = UF;

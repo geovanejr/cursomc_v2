@@ -100,17 +100,42 @@ public class DBService {
 
         // Instanciando Estado
 
-        Estado est1 = new Estado(null, "São Paulo", "SP");
-        Estado est2 = new Estado(null, "Minas Gerais", "MG");
+        Estado est1 = new Estado(null, "RO", "Rondônia");
+        Estado est2 = new Estado(null, "AC", "Acre");
+        Estado est3 = new Estado(null, "AM", "Amazonas");
+        Estado est4 = new Estado(null, "RR", "Roraima");
+        Estado est5 = new Estado(null, "PA", "Pará");
+        Estado est6 = new Estado(null, "AP", "Amapá");
+        Estado est7 = new Estado(null, "TO", "Tocantins");
+        Estado est8 = new Estado(null, "MA", "Maranhão");
+        Estado est9 = new Estado(null, "PI", "Piauí");
+        Estado est10 = new Estado(null, "CE", "Ceará");
+        Estado est11 = new Estado(null, "RN", "Rio Grande do Norte");
+        Estado est12 = new Estado(null, "PB", "Paraíba");
+        Estado est13 = new Estado(null, "PE", "Pernambuco");
+        Estado est14 = new Estado(null, "AL", "Alagoas");
+        Estado est15 = new Estado(null, "SE", "Sergipe");
+        Estado est16 = new Estado(null, "BA", "Bahia");
+        Estado est17 = new Estado(null, "MG", "Minas Gerais");
+        Estado est18 = new Estado(null, "ES", "Espírito Santo");
+        Estado est19 = new Estado(null, "RJ", "Rio de Janeiro");
+        Estado est20 = new Estado(null, "SP", "São Paulo");
+        Estado est21 = new Estado(null, "PR", "Paraná");
+        Estado est22 = new Estado(null, "SC", "Santa Catarina");
+        Estado est23 = new Estado(null, "RS", "Rio Grande do Sul");
+        Estado est24 = new Estado(null, "MS", "Mato Grosso do Sul");
+        Estado est25 = new Estado(null, "MT", "Mato Grosso");
+        Estado est26 = new Estado(null, "GO", "Goiás");
+        Estado est27 = new Estado(null, "DF", "Distrito Federal");
 
-        Cidade cid1 = new Cidade(null, "Uberlândia", est2);
-        Cidade cid2 = new Cidade(null, "São Paulo", est1);
-        Cidade cid3 = new Cidade(null, "Campinas", est1);
+        Cidade cid1 = new Cidade(null, "Uberlândia", est17);
+        Cidade cid2 = new Cidade(null, "São Paulo", est20);
+        Cidade cid3 = new Cidade(null, "Campinas", est20);
 
-        est1.getCidades().addAll(Arrays.asList(cid2, cid3));
-        est2.getCidades().addAll(Arrays.asList(cid1));
+        est20.getCidades().addAll(Arrays.asList(cid2, cid3));
+        est17.getCidades().addAll(Arrays.asList(cid1));
 
-        estadoRepository.saveAll(Arrays.asList(est1, est2));
+        estadoRepository.saveAll(Arrays.asList(est1, est2, est3, est4, est5, est6, est7, est8, est9, est10, est11, est12, est13, est14, est15, est16, est17, est18, est19, est20, est21, est22, est23, est24, est25, est26, est27));
         cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
 
         Cliente cli1 = new Cliente(null,"Geovane Soares Galvão Junior", "14856523830","geovane.gjunior@gmail.com", TipoCliente.PESSOAFISICA, bCryptPass.encode("123456"));
