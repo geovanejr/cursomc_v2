@@ -86,9 +86,9 @@ public class PedidoService {
 
         itemPedidoRepository.saveAll(pedido.getItens());
 
-//        System.out.println(pedido);
+        System.out.println(pedido);
 
-        emailService.sendOrderConfirmationEmail(pedido);
+//        emailService.sendOrderConfirmationEmail(pedido);
 
 //        emailService.sendOrderConfirmationHTMLEmail(pedido);
 
