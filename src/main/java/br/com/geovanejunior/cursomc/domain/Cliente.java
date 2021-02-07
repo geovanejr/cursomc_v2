@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
-public class Cliente implements Serializable {
+public class  Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

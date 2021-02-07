@@ -1,11 +1,9 @@
 package br.com.geovanejunior.cursomc.dto;
 
 import br.com.geovanejunior.cursomc.domain.Cidade;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CidadeDTO implements Serializable {
@@ -14,7 +12,8 @@ public class CidadeDTO implements Serializable {
 
     private Long id;
 
-    @Column(length = 100)
+    @NotEmpty(message = "Preenchimento Obrigatório")
+    @Length(min=5, max=40, message = "O tamanho deve ser entre 5 e 40 caracteres")
     private String nome;
 
     public CidadeDTO() {

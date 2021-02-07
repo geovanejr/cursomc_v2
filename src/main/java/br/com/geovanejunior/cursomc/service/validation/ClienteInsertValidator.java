@@ -31,13 +31,13 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
         if (clienteNewDTO.getTipoCliente().equals(TipoCliente.PESSOAFISICA.getCodTipoCliente()) &&
             !BR.isValidCPF(clienteNewDTO.getCpfOUCNPJ())){
 
-            list.add(new FieldMessage("cpfOUCNPJ", "CPF do Cliente inválido"));
+            list.add(new FieldMessage("cpfOUCNPJ", ": CPF do Cliente inválido"));
         }
 
         if (clienteNewDTO.getTipoCliente().equals(TipoCliente.PESSOAJURIDA.getCodTipoCliente()) &&
             !BR.isValidCNPJ(clienteNewDTO.getCpfOUCNPJ())) {
 
-            list.add(new FieldMessage("cpfOUCNPJ", "CNPJ do Cliente inválido"));
+            list.add(new FieldMessage("cpfOUCNPJ", ": CNPJ do Cliente inválido"));
         }
 
         // Validação de existência do email informando em base de dados
@@ -45,7 +45,13 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
         Cliente aux = clienteRepository.findByEmail(clienteNewDTO.getEmail());
 
         if (aux != null) {
-            list.add(new FieldMessage("email", "Email informado (" + clienteNewDTO.getEmail() + ") já existente"));
+            list.add(new FieldMessage("email", ": Email informado (" + clienteNewDTO.getEmail() + ") já existente"));
+        }
+
+        Cliente aux2 = clienteRepository.findBycpfOUCNPJ(clienteNewDTO.getCpfOUCNPJ());
+
+        if (aux2 != null) {
+            list.add(new FieldMessage("cpfOUCNPJ", ": CPF/CNPJ informado (" + clienteNewDTO.getCpfOUCNPJ() + ") já existente"));
         }
 
         for (FieldMessage e : list) {
