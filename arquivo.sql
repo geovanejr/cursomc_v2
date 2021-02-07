@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -28,7 +28,7 @@ CREATE TABLE `categoria` (
   `data_cadastro` datetime DEFAULT NULL,
   `nome` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,NULL,'2020-12-21 11:04:03','Informática'),(2,NULL,'2020-12-21 11:04:03','Escritório'),(3,NULL,'2020-12-21 11:04:03','Cama Mesa & Banho'),(4,NULL,'2020-12-21 11:04:03','Eletrônicos'),(5,NULL,'2020-12-21 11:04:03','Jardinagem'),(6,NULL,'2020-12-21 11:04:03','Decoração'),(7,NULL,'2020-12-21 11:04:03','Perfumaria');
+INSERT INTO `categoria` VALUES (1,NULL,'2021-02-07 14:47:35','Informática'),(2,NULL,'2021-02-07 14:47:35','Escritório'),(3,NULL,'2021-02-07 14:47:35','Cama Mesa & Banho'),(4,NULL,'2021-02-07 14:47:35','Eletrônicos'),(5,NULL,'2021-02-07 14:47:35','Jardinagem'),(6,NULL,'2021-02-07 14:47:35','Decoração'),(7,NULL,'2021-02-07 14:47:35','Perfumaria');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +55,7 @@ CREATE TABLE `cidade` (
   PRIMARY KEY (`id`),
   KEY `FKkworrwk40xj58kevvh3evi500` (`estado_id`),
   CONSTRAINT `FKkworrwk40xj58kevvh3evi500` FOREIGN KEY (`estado_id`) REFERENCES `estado` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `cidade` (
 
 LOCK TABLES `cidade` WRITE;
 /*!40000 ALTER TABLE `cidade` DISABLE KEYS */;
-INSERT INTO `cidade` VALUES (1,'Uberlândia',2),(2,'São Paulo',1),(3,'Campinas',1);
+INSERT INTO `cidade` VALUES (1,'Rio Branco',1),(2,'Maceió',2),(3,'Macapá',3),(4,'Manaus',4),(5,'Salvador',5),(6,'Fortaleza',6),(7,'Brasília',7),(8,'Vitória',8),(9,'Goiânia',9),(10,'São Luís',10),(11,'Cuiabá',11),(12,'Campo Grande',12),(13,'Belo Horizonte',13),(14,'Belém',14),(15,'João Pessoa',15),(16,'Curitiba',16),(17,'Recife',17),(18,'Teresina',18),(19,'Rio de Janeiro',19),(20,'Natal',20),(21,'Porto Alegre',21),(22,'Porto Velho',22),(23,'Boa Vista',23),(24,'Florianópolis',24),(25,'São Paulo',25),(26,'Aracaju',26),(27,'Palmas',27);
 /*!40000 ALTER TABLE `cidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,10 +81,11 @@ CREATE TABLE `cliente` (
   `data_atualizacao` datetime DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `nome` varchar(100) DEFAULT NULL,
+  `senha` varchar(255) DEFAULT NULL,
   `tipo_cliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_cmxo70m08n43599l3h0h07cc6` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'12345678909',NULL,'maria@gmail.com','Maria Silva',1),(2,'14856523830',NULL,'geovane.gjunior@gmail.com','Geovane Junior',1);
+INSERT INTO `cliente` VALUES (1,'14856523830',NULL,'geovane.gjunior@gmail.com','Geovane Soares Galvão Junior','$2a$10$RSg8iNulwB7m2LWfeDJlye3HVKHw2JYmAyH1IjPpVqwJSfktiS0Dm',1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +119,7 @@ CREATE TABLE `endereco` (
   KEY `FK8s7ivtl4foyhrfam9xqom73n9` (`cliente_id`),
   CONSTRAINT `FK8b1kcb3wucapb8dejshyn5fsx` FOREIGN KEY (`cidade_id`) REFERENCES `cidade` (`id`),
   CONSTRAINT `FK8s7ivtl4foyhrfam9xqom73n9` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +128,7 @@ CREATE TABLE `endereco` (
 
 LOCK TABLES `endereco` WRITE;
 /*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
-INSERT INTO `endereco` VALUES (1,'Jardim','38220834','Apto 203','Rua Flores','300',1,1),(2,'Centro','38777012','Sala 800','Av Mattos','105',2,1),(3,'Jd Antônio','05376100',NULL,'Av João José Gomes','87',2,2);
+INSERT INTO `endereco` VALUES (1,'Jd Antônio','05376100',NULL,'Av João José Gomes','87',25,1);
 /*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +144,7 @@ CREATE TABLE `estado` (
   `uf` varchar(255) DEFAULT NULL,
   `nome` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +153,7 @@ CREATE TABLE `estado` (
 
 LOCK TABLES `estado` WRITE;
 /*!40000 ALTER TABLE `estado` DISABLE KEYS */;
-INSERT INTO `estado` VALUES (1,'SP','São Paulo'),(2,'MG','Minas Gerais');
+INSERT INTO `estado` VALUES (1,'AC','Acre'),(2,'AL','Alagoas'),(3,'AP','Amapá'),(4,'AM','Amazonas'),(5,'BA','Bahia'),(6,'CE','Ceará'),(7,'DF','Distrito Federal'),(8,'ES','Espírito Santo'),(9,'GO','Goiás'),(10,'MA','Maranhão'),(11,'MT','Mato Grosso'),(12,'MS','Mato Grosso do Sul'),(13,'MG','Minas Gerais'),(14,'PA','Pará'),(15,'PB','Paraíba'),(16,'PR','Paraná'),(17,'PE','Pernambuco'),(18,'PI','Piauí'),(19,'RJ','Rio de Janeiro'),(20,'RN','Rio Grande do Norte'),(21,'RS','Rio Grande do Sul'),(22,'RO','Rondônia'),(23,'RR','Roraima'),(24,'SC','Santa Catarina'),(25,'SP','São Paulo'),(26,'SE','Sergipe'),(27,'TO','Tocantins');
 /*!40000 ALTER TABLE `estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +174,7 @@ CREATE TABLE `item_pedido` (
   KEY `FKtk55mn6d6bvl5h0no5uagi3sf` (`produto_id`),
   CONSTRAINT `FK60ym08cfoysa17wrn1swyiuda` FOREIGN KEY (`pedido_id`) REFERENCES `pedido` (`id`),
   CONSTRAINT `FKtk55mn6d6bvl5h0no5uagi3sf` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +183,7 @@ CREATE TABLE `item_pedido` (
 
 LOCK TABLES `item_pedido` WRITE;
 /*!40000 ALTER TABLE `item_pedido` DISABLE KEYS */;
-INSERT INTO `item_pedido` VALUES (0,2000,1,1,1),(5,80,2,1,3),(20,100,4,1,9),(10,800,1,2,2);
+INSERT INTO `item_pedido` VALUES (0,2000,1,1,1),(5,80,2,1,3),(20,100,4,1,9),(10,800,1,2,2),(0,2000,4,3,1),(0,80,22,3,3),(0,90,3,3,11),(0,2000,5,4,1),(0,80,22,4,3),(0,90,2,4,11);
 /*!40000 ALTER TABLE `item_pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +199,7 @@ CREATE TABLE `pagamento` (
   `estado_pagamento` int(11) DEFAULT NULL,
   PRIMARY KEY (`pedido_id`),
   CONSTRAINT `FKthad9tkw4188hb3qo1lm5ueb0` FOREIGN KEY (`pedido_id`) REFERENCES `pedido` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +208,7 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-INSERT INTO `pagamento` VALUES (1,2),(2,1);
+INSERT INTO `pagamento` VALUES (1,2),(2,1),(3,1),(4,1);
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +225,7 @@ CREATE TABLE `pagamento_com_boleto` (
   `pedido_id` bigint(20) NOT NULL,
   PRIMARY KEY (`pedido_id`),
   CONSTRAINT `FKcr74vrxf8nfph0knq2bho8doo` FOREIGN KEY (`pedido_id`) REFERENCES `pagamento` (`pedido_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +234,7 @@ CREATE TABLE `pagamento_com_boleto` (
 
 LOCK TABLES `pagamento_com_boleto` WRITE;
 /*!40000 ALTER TABLE `pagamento_com_boleto` DISABLE KEYS */;
-INSERT INTO `pagamento_com_boleto` VALUES (NULL,'2017-10-20 01:00:00',2);
+INSERT INTO `pagamento_com_boleto` VALUES (NULL,'2017-10-20 01:00:00',2),('2021-02-14 17:48:44',NULL,3),('2021-02-14 17:50:44',NULL,4);
 /*!40000 ALTER TABLE `pagamento_com_boleto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,7 +250,7 @@ CREATE TABLE `pagamento_com_cartao` (
   `pedido_id` bigint(20) NOT NULL,
   PRIMARY KEY (`pedido_id`),
   CONSTRAINT `FKta3cdnuuxclwfh52t4qi432ow` FOREIGN KEY (`pedido_id`) REFERENCES `pagamento` (`pedido_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +280,7 @@ CREATE TABLE `pedido` (
   KEY `FK1fihyy2fnocpuwc74674qmfkv` (`endereco_de_entrega_id`),
   CONSTRAINT `FK1fihyy2fnocpuwc74674qmfkv` FOREIGN KEY (`endereco_de_entrega_id`) REFERENCES `endereco` (`id`),
   CONSTRAINT `FK30s8j2ktpay6of18lbyqn3632` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,8 +289,33 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,'2017-09-30 10:32:00',1,1),(2,'2017-10-10 00:00:00',1,2);
+INSERT INTO `pedido` VALUES (1,'2017-09-30 10:32:00',1,1),(2,'2017-10-10 00:00:00',1,1),(3,'2021-02-07 17:48:44',1,1),(4,'2021-02-07 17:50:44',1,1);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `perfis`
+--
+
+DROP TABLE IF EXISTS `perfis`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `perfis` (
+  `cliente_id` bigint(20) NOT NULL,
+  `perfis` int(11) DEFAULT NULL,
+  KEY `FKsobr8hl9guwr8775lyl1mncg2` (`cliente_id`),
+  CONSTRAINT `FKsobr8hl9guwr8775lyl1mncg2` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `perfis`
+--
+
+LOCK TABLES `perfis` WRITE;
+/*!40000 ALTER TABLE `perfis` DISABLE KEYS */;
+INSERT INTO `perfis` VALUES (1,1),(1,2);
+/*!40000 ALTER TABLE `perfis` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -305,7 +331,7 @@ CREATE TABLE `produto` (
   `nome` varchar(255) DEFAULT NULL,
   `preco` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +340,7 @@ CREATE TABLE `produto` (
 
 LOCK TABLES `produto` WRITE;
 /*!40000 ALTER TABLE `produto` DISABLE KEYS */;
-INSERT INTO `produto` VALUES (1,'2020-12-21 11:04:03','Computador',2000),(2,'2020-12-21 11:04:03','Impressora',800),(3,'2020-12-21 11:04:03','Mouse',80),(4,'2020-12-21 11:04:03','Mesa de escritório',300),(5,'2020-12-21 11:04:03','Toalha',50),(6,'2020-12-21 11:04:03','Colcha',200),(7,'2020-12-21 11:04:03','TV true color',1200),(8,'2020-12-21 11:04:03','Roçadeira',800),(9,'2020-12-21 11:04:03','Abajour',100),(10,'2020-12-21 11:04:03','Pendente',180),(11,'2020-12-21 11:04:03','Shampoo',90);
+INSERT INTO `produto` VALUES (1,'2021-02-07 14:47:35','Computador',2000),(2,'2021-02-07 14:47:35','Impressora',800),(3,'2021-02-07 14:47:35','Mouse',80),(4,'2021-02-07 14:47:35','Mesa de escritório',300),(5,'2021-02-07 14:47:35','Toalha',50),(6,'2021-02-07 14:47:35','Colcha',200),(7,'2021-02-07 14:47:35','TV true color',1200),(8,'2021-02-07 14:47:35','Roçadeira',800),(9,'2021-02-07 14:47:35','Abajour',100),(10,'2021-02-07 14:47:35','Sabonete',2.89),(11,'2021-02-07 14:47:35','Shampoo',90);
 /*!40000 ALTER TABLE `produto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +358,7 @@ CREATE TABLE `produto_categoria` (
   KEY `FK1c0y58d3n6x3m6euv2j3h64vt` (`produto_id`),
   CONSTRAINT `FK1c0y58d3n6x3m6euv2j3h64vt` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`),
   CONSTRAINT `FKq3g33tp7xk2juh53fbw6y4y57` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,7 +367,7 @@ CREATE TABLE `produto_categoria` (
 
 LOCK TABLES `produto_categoria` WRITE;
 /*!40000 ALTER TABLE `produto_categoria` DISABLE KEYS */;
-INSERT INTO `produto_categoria` VALUES (1,1),(1,4),(2,1),(2,2),(2,4),(3,1),(3,4),(4,2),(5,3),(6,3),(7,4),(8,5),(9,6),(10,6),(11,7);
+INSERT INTO `produto_categoria` VALUES (1,1),(1,4),(2,1),(2,2),(2,4),(3,1),(3,4),(4,2),(5,3),(6,3),(7,4),(8,5),(9,6),(10,7),(11,7);
 /*!40000 ALTER TABLE `produto_categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,7 +383,7 @@ CREATE TABLE `telefone` (
   `telefones` varchar(255) DEFAULT NULL,
   KEY `FK8aafha0njkoyoe3kvrwsy3g8u` (`cliente_id`),
   CONSTRAINT `FK8aafha0njkoyoe3kvrwsy3g8u` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +392,7 @@ CREATE TABLE `telefone` (
 
 LOCK TABLES `telefone` WRITE;
 /*!40000 ALTER TABLE `telefone` DISABLE KEYS */;
-INSERT INTO `telefone` VALUES (1,'11991231231'),(2,'11999468056'),(2,'11982854499');
+INSERT INTO `telefone` VALUES (1,'11991231231');
 /*!40000 ALTER TABLE `telefone` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -379,4 +405,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-21 14:04:42
+-- Dump completed on 2021-02-07 18:08:00
