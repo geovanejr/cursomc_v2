@@ -3,6 +3,9 @@ package br.com.geovanejunior.cursomc.resources;
 import br.com.geovanejunior.cursomc.domain.Categoria;
 import br.com.geovanejunior.cursomc.dto.CategoriaDTO;
 import br.com.geovanejunior.cursomc.service.CategoriaService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,7 @@ public class CategoriaResource {
     @Autowired
     private CategoriaService categoriaService;
 
+    @ApiOperation(value="Pesquisa categoria por Id")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Categoria> findById(@PathVariable Long id) {
 
@@ -32,6 +36,7 @@ public class CategoriaResource {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @ApiOperation(value="Inserção de nova categoria")
     @PostMapping
     public ResponseEntity<Void> insertCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO) {
 
@@ -59,6 +64,9 @@ public class CategoriaResource {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos"),
+            @ApiResponse(code = 404, message = "Categoria inexistente") })
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteCategoria(@PathVariable Long id) {
 
